@@ -34,3 +34,15 @@ __pycache__/
 
 # Environment files
 .env
+
+# Kraken2 database - do not upload to GitHub
+databases/kraken2/*
+!databases/kraken2/.gitkeep
+
+# Ignore generated results and sequencing data
+data/raw/*
+data/cleaned/*
+results/*
+logs/*
+# Kraken2 database - keep locally, never upload
+databases/
