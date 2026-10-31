@@ -1,0 +1,36 @@
+
+# Raw and processed sequencing data
+data/raw/*
+data/cleaned/*
+
+# Kraken2 database files and downloaded archives
+databases/kraken2/*
+!databases/kraken2/.gitkeep
+
+# Generated analysis outputs
+results/*
+logs/*
+
+# Temporary files
+*.tmp
+*.log
+*.tar.gz
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.bam
+*.sam
+*.vcf
+*.vcf.gz
+*.biom
+
+# Windows metadata
+*:Zone.Identifier
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment files
+.env
