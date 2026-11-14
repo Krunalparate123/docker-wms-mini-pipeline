@@ -1,0 +1,6 @@
+docker run --rm python:3.11-slim bash -lc '
+apt-get update -qq &&
+apt-get install -y -qq --no-install-recommends ncbi-blast+ &&
+pip install --no-cache-dir cogclassifier kraken-biom biom-format &&
+pip freeze
+' > docker/bioinfo-tools/requirements-resolved.txt

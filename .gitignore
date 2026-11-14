@@ -1,0 +1,381 @@
+iridipennis$ tree
+.
+├── config
+│   └── config.sh
+├── data
+│   └── raw
+│       ├── Tetragonlairidipennis_1.fastq.gz
+│       └── Tetragonlairidipennis_2.fastq.gz
+├── docker
+│   ├── Dockerfile
+│   ├── bioinfo-tools
+│   │   ├── Dockerfile
+│   │   ├── requirements-resolved.txt
+│   │   └── requirements.txt
+│   └── images.txt
+├── logs
+│   ├── 01_raw_fastqc.log
+│   ├── 02_raw_multiqc.log
+│   ├── 03_trimgalore.log
+│   ├── 04_trimmed_fastqc.log
+│   ├── 05_trimmed_multiqc.log
+│   ├── 06_megahit.log
+│   ├── 07_prodigal.log
+│   ├── 08_kraken2.log
+│   ├── 09_kraken_biom.log
+│   └── 10_biom_to_tsv.log
+├── results
+│   ├── assembly
+│   │   └── megahit
+│   │       ├── checkpoints.txt
+│   │       ├── done
+│   │       ├── final.contigs.fa
+│   │       ├── intermediate_contigs
+│   │       │   ├── k119.addi.fa
+│   │       │   ├── k119.addi.fa.info
+│   │       │   ├── k119.bubble_seq.fa
+│   │       │   ├── k119.bubble_seq.fa.info
+│   │       │   ├── k119.contigs.fa
+│   │       │   ├── k119.contigs.fa.info
+│   │       │   ├── k119.final.contigs.fa
+│   │       │   ├── k119.final.contigs.fa.info
+│   │       │   ├── k119.local.fa
+│   │       │   ├── k119.local.fa.info
+│   │       │   ├── k141.addi.fa
+│   │       │   ├── k141.addi.fa.info
+│   │       │   ├── k141.bubble_seq.fa
+│   │       │   ├── k141.bubble_seq.fa.info
+│   │       │   ├── k141.contigs.fa
+│   │       │   ├── k141.contigs.fa.info
+│   │       │   ├── k141.final.contigs.fa
+│   │       │   ├── k141.final.contigs.fa.info
+│   │       │   ├── k21.addi.fa
+│   │       │   ├── k21.addi.fa.info
+│   │       │   ├── k21.bubble_seq.fa
+│   │       │   ├── k21.bubble_seq.fa.info
+│   │       │   ├── k21.contigs.fa
+│   │       │   ├── k21.contigs.fa.info
+│   │       │   ├── k21.final.contigs.fa
+│   │       │   ├── k21.final.contigs.fa.info
+│   │       │   ├── k21.local.fa
+│   │       │   ├── k21.local.fa.info
+│   │       │   ├── k29.addi.fa
+│   │       │   ├── k29.addi.fa.info
+│   │       │   ├── k29.bubble_seq.fa
+│   │       │   ├── k29.bubble_seq.fa.info
+│   │       │   ├── k29.contigs.fa
+│   │       │   ├── k29.contigs.fa.info
+│   │       │   ├── k29.final.contigs.fa
+│   │       │   ├── k29.final.contigs.fa.info
+│   │       │   ├── k29.local.fa
+│   │       │   ├── k29.local.fa.info
+│   │       │   ├── k39.addi.fa
+│   │       │   ├── k39.addi.fa.info
+│   │       │   ├── k39.bubble_seq.fa
+│   │       │   ├── k39.bubble_seq.fa.info
+│   │       │   ├── k39.contigs.fa
+│   │       │   ├── k39.contigs.fa.info
+│   │       │   ├── k39.final.contigs.fa
+│   │       │   ├── k39.final.contigs.fa.info
+│   │       │   ├── k39.local.fa
+│   │       │   ├── k39.local.fa.info
+│   │       │   ├── k59.addi.fa
+│   │       │   ├── k59.addi.fa.info
+│   │       │   ├── k59.bubble_seq.fa
+│   │       │   ├── k59.bubble_seq.fa.info
+│   │       │   ├── k59.contigs.fa
+│   │       │   ├── k59.contigs.fa.info
+│   │       │   ├── k59.final.contigs.fa
+│   │       │   ├── k59.final.contigs.fa.info
+│   │       │   ├── k59.local.fa
+│   │       │   ├── k59.local.fa.info
+│   │       │   ├── k79.addi.fa
+│   │       │   ├── k79.addi.fa.info
+│   │       │   ├── k79.bubble_seq.fa
+│   │       │   ├── k79.bubble_seq.fa.info
+│   │       │   ├── k79.contigs.fa
+│   │       │   ├── k79.contigs.fa.info
+│   │       │   ├── k79.final.contigs.fa
+│   │       │   ├── k79.final.contigs.fa.info
+│   │       │   ├── k79.local.fa
+│   │       │   ├── k79.local.fa.info
+│   │       │   ├── k99.addi.fa
+│   │       │   ├── k99.addi.fa.info
+│   │       │   ├── k99.bubble_seq.fa
+│   │       │   ├── k99.bubble_seq.fa.info
+│   │       │   ├── k99.contigs.fa
+│   │       │   ├── k99.contigs.fa.info
+│   │       │   ├── k99.final.contigs.fa
+│   │       │   ├── k99.final.contigs.fa.info
+│   │       │   ├── k99.local.fa
+│   │       │   └── k99.local.fa.info
+│   │       ├── log
+│   │       └── options.json
+│   ├── biom
+│   │   ├── Tetragonlairidipennis.biom
+│   │   └── otu_table
+│   │       └── OTU_TABLE.tsv
+│   ├── bracken
+│   │   └── Tetragonlairidipennis.bracken
+│   ├── cog_annotation
+│   │   ├── cog_classify.tsv
+│   │   ├── cog_count.tsv
+│   │   ├── cog_count_barchart.html
+│   │   ├── cog_count_barchart.png
+│   │   ├── cog_count_piechart.html
+│   │   ├── cog_count_piechart.png
+│   │   ├── cogclassifier.log
+│   │   └── rpsblast.tsv
+│   ├── gene_prediction
+│   │   ├── genes.fna
+│   │   ├── genes.gbk
+│   │   ├── genes.gff
+│   │   └── proteins.faa
+│   ├── kraken2
+│   │   ├── Tetragonlairidipennis.kraken
+│   │   └── Tetragonlairidipennis.report
+│   ├── qc
+│   │   ├── raw
+│   │   │   ├── Tetragonlairidipennis_1_fastqc.html
+│   │   │   ├── Tetragonlairidipennis_1_fastqc.zip
+│   │   │   ├── Tetragonlairidipennis_2_fastqc.html
+│   │   │   └── Tetragonlairidipennis_2_fastqc.zip
+│   │   ├── raw_multiqc
+│   │   │   ├── raw_multiqc_report.html
+│   │   │   ├── raw_multiqc_report_1.html
+│   │   │   ├── raw_multiqc_report_data
+│   │   │   │   ├── fastqc-status-check-heatmap.txt
+│   │   │   │   ├── fastqc_adapter_content_plot.txt
+│   │   │   │   ├── fastqc_per_base_n_content_plot.txt
+│   │   │   │   ├── fastqc_per_base_sequence_quality_plot.txt
+│   │   │   │   ├── fastqc_per_sequence_gc_content_plot_Counts.txt
+│   │   │   │   ├── fastqc_per_sequence_gc_content_plot_Percentages.txt
+│   │   │   │   ├── fastqc_per_sequence_quality_scores_plot.txt
+│   │   │   │   ├── fastqc_sequence_counts_plot.txt
+│   │   │   │   ├── fastqc_sequence_duplication_levels_plot.txt
+│   │   │   │   ├── fastqc_top_overrepresented_sequences_table.txt
+│   │   │   │   ├── llms-full.txt
+│   │   │   │   ├── multiqc.log
+│   │   │   │   ├── multiqc.parquet
+│   │   │   │   ├── multiqc_citations.txt
+│   │   │   │   ├── multiqc_data.json
+│   │   │   │   ├── multiqc_fastqc.txt
+│   │   │   │   ├── multiqc_general_stats.txt
+│   │   │   │   ├── multiqc_software_versions.txt
+│   │   │   │   └── multiqc_sources.txt
+│   │   │   └── raw_multiqc_report_data_1
+│   │   │       ├── fastqc-status-check-heatmap.txt
+│   │   │       ├── fastqc_adapter_content_plot.txt
+│   │   │       ├── fastqc_per_base_n_content_plot.txt
+│   │   │       ├── fastqc_per_base_sequence_quality_plot.txt
+│   │   │       ├── fastqc_per_sequence_gc_content_plot_Counts.txt
+│   │   │       ├── fastqc_per_sequence_gc_content_plot_Percentages.txt
+│   │   │       ├── fastqc_per_sequence_quality_scores_plot.txt
+│   │   │       ├── fastqc_sequence_counts_plot.txt
+│   │   │       ├── fastqc_sequence_duplication_levels_plot.txt
+│   │   │       ├── fastqc_top_overrepresented_sequences_table.txt
+│   │   │       ├── llms-full.txt
+│   │   │       ├── multiqc.log
+│   │   │       ├── multiqc.parquet
+│   │   │       ├── multiqc_citations.txt
+│   │   │       ├── multiqc_data.json
+│   │   │       ├── multiqc_fastqc.txt
+│   │   │       ├── multiqc_general_stats.txt
+│   │   │       ├── multiqc_software_versions.txt
+│   │   │       └── multiqc_sources.txt
+│   │   ├── trimmed
+│   │   │   ├── Tetragonlairidipennis_1_val_1_fastqc.html
+│   │   │   ├── Tetragonlairidipennis_1_val_1_fastqc.zip
+│   │   │   ├── Tetragonlairidipennis_2_val_2_fastqc.html
+│   │   │   └── Tetragonlairidipennis_2_val_2_fastqc.zip
+│   │   └── trimmed_multiqc
+│   │       ├── trimmed_multiqc_report.html
+│   │       └── trimmed_multiqc_report_data
+│   │           ├── fastqc-status-check-heatmap.txt
+│   │           ├── fastqc_adapter_content_plot.txt
+│   │           ├── fastqc_per_base_n_content_plot.txt
+│   │           ├── fastqc_per_base_sequence_quality_plot.txt
+│   │           ├── fastqc_per_sequence_gc_content_plot_Counts.txt
+│   │           ├── fastqc_per_sequence_gc_content_plot_Percentages.txt
+│   │           ├── fastqc_per_sequence_quality_scores_plot.txt
+│   │           ├── fastqc_sequence_counts_plot.txt
+│   │           ├── fastqc_sequence_duplication_levels_plot.txt
+│   │           ├── fastqc_sequence_length_distribution_plot.txt
+│   │           ├── fastqc_top_overrepresented_sequences_table.txt
+│   │           ├── llms-full.txt
+│   │           ├── multiqc.log
+│   │           ├── multiqc.parquet
+│   │           ├── multiqc_citations.txt
+│   │           ├── multiqc_data.json
+│   │           ├── multiqc_fastqc.txt
+│   │           ├── multiqc_general_stats.txt
+│   │           ├── multiqc_software_versions.txt
+│   │           └── multiqc_sources.txt
+│   └── trimmed
+│       ├── Tetragonlairidipennis_1.fastq.gz_trimming_report.json
+│       ├── Tetragonlairidipennis_1.fastq.gz_trimming_report.txt
+│       ├── Tetragonlairidipennis_1_val_1.fq.gz
+│       ├── Tetragonlairidipennis_2.fastq.gz_trimming_report.json
+│       ├── Tetragonlairidipennis_2.fastq.gz_trimming_report.txt
+│       └── Tetragonlairidipennis_2_val_2.fq.gz
+└── scripts
+    ├── pull_docker_images.sh
+    ├── run_wms.sh
+    ├── run_wms.sh.backup
+    ├── run_wms.sh.save
+    └── run_wms.sh.save.1
+
+27 directories, 198 files
+(base) krunalparate@DESKTOP-GN6A8SE:~/docker_wms_mini/Tetragonlairidipennis$ git status
+norml;aly whuch file i have to tupload to the git hub account
+…
+Krunal, for your GitHub portfolio, you should upload the pipeline code, Docker files, configuration, and selected analysis results. You do not need to upload all 198 files.
+
+Here is exactly what I recommend.
+
+1. Upload these files
+Keep and upload
+Tetragonlairidipennis/
+│
+├── README.md
+├── .gitignore
+│
+├── config/
+│   └── config.sh
+│
+├── docker/
+│   ├── Dockerfile
+│   ├── images.txt
+│   └── bioinfo-tools/
+│       ├── Dockerfile
+│       └── requirements.txt
+│
+├── scripts/
+│   ├── run_wms.sh
+│   └── pull_docker_images.sh
+│
+└── results/
+    ├── assembly/
+    │   └── megahit/
+    │       └── final.contigs.fa
+    ├── gene_prediction/
+    │   ├── genes.gff
+    │   └── proteins.faa
+    ├── kraken2/
+    │   └── Tetragonlairidipennis.report
+    ├── bracken/
+    │   └── Tetragonlairidipennis.bracken
+    ├── cog_annotation/
+    │   ├── cog_classify.tsv
+    │   ├── cog_count.tsv
+    │   ├── cog_count_barchart.png
+    │   └── cog_count_piechart.png
+    ├── biom/
+    │   └── otu_table/
+    │       └── OTU_TABLE.tsv
+    └── qc/
+        ├── raw/
+        │   ├── Tetragonlairidipennis_1_fastqc.html
+        │   └── Tetragonlairidipennis_2_fastqc.html
+        └── trimmed/
+            ├── Tetragonlairidipennis_1_val_1_fastqc.html
+            └── Tetragonlairidipennis_2_val_2_fastqc.html
+2. Do NOT upload these
+Files
+
+Reason
+
+data/raw/*.fastq.gz
+
+Large raw sequencing data
+
+results/trimmed/*.fq.gz
+
+Large intermediate reads
+
+results/assembly/megahit/intermediate_contigs/
+
+Intermediate assembly files
+
+results/kraken2/*.kraken
+
+Large classification output
+
+results/biom/*.biom
+
+Optional; TSV is enough for portfolio
+
+logs/
+
+Not necessary for the main portfolio
+
+run_wms.sh.backup and .save files
+
+Old script copies
+
+requirements-resolved.txt
+
+Temporary dependency snapshot
+
+Database files
+
+Too large; keep outside GitHub
+
+3. Create your .gitignore
+Run:
+
+nano .gitignore
+
+Paste:
+
+data/raw/
+results/trimmed/
+results/assembly/megahit/intermediate_contigs/
+results/kraken2/*.kraken
+results/biom/*.biom
+logs/
+*.backup
+*.save
+*.save.*
+__pycache__/
+Save using Ctrl + O, Enter, Ctrl + X.
+
+4. Add the selected files to Git
+Run:
+
+git add .gitignore config/ docker/ scripts/run_wms.sh scripts/pull_docker_images.sh
+
+Then add the selected results:
+
+git add results/assembly/megahit/final.contigs.fa
+git add results/gene_prediction/genes.gff results/gene_prediction/proteins.faa
+git add results/kraken2/Tetragonlairidipennis.report
+git add results/bracken/Tetragonlairidipennis.bracken
+git add results/cog_annotation/cog_classify.tsv results/cog_annotation/cog_count.tsv results/cog_annotation/*.png
+git add results/biom/otu_table/OTU_TABLE.tsv
+git add results/qc/raw/*.html results/qc/trimmed/*.html
+
+5. Check and upload
+git status
+
+If the files look correct:
+
+git commit -m "Add Docker-based WMS pipeline with analysis results"
+git push -u origin main
+
+Your Docker image stays on Docker Hub: kparate/wms-pipeline:1.0. GitHub will contain the Dockerfiles, scripts, configuration, and example outputs.
+
+One important point: your current run_wms.sh must use the paths in config/config.sh correctly before you describe the pipeline as portable in your README.
+
+
+
+
+
+data/raw/
+results/trimmed/
+results/assembly/megahit/intermediate_contigs/
+results/kraken2/*.kraken
+results/biom/*.biom
+scripts/*.backup
+scripts/*.save*
+docker/bioinfo-tools/requirements-resolved.txt
